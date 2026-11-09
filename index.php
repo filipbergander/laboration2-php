@@ -15,10 +15,25 @@
 </head>
 
 <body>
+    <h1>
+
+    </h1>
+    <main>
+        
+    </main>
     <?php
     echo "Hi!";
+    $name = "Filip";
+    echo "<p>$name</p>";
     ?>
     <button>Hi</button>
+    <form metod="post">
+
+
+    </form>
+    <footer>
+        <?= $name; ?>
+    </footer>
 </body>
 
 </html>
