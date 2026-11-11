@@ -11,5 +11,32 @@
     <!-- Milligram CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
     <script src="js/main.js" defer></script>
-    <title>Laboration 2 | PHP</title>
+    <title>Uppgift 2 | PHP</title>
 </head>
+
+<body>
+    <div>
+        <h1>
+            AI för utveckling
+        </h1>
+    </div>
+
+    <main>
+        <h2>AI-verktyg</h2>
+        <article>
+            <h3>Stöd i uppgiften</h3>
+            <p></p>
+        </article>
+        <article>
+              <h3>Slutsatser av AI som stöd</h3>
+            <p></p>
+        </article>
+        <article>
+            <h3></h3>
+            <p></p>
+        </article>
+
+    </main>
+</body>
+
+</html>

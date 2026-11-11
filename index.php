@@ -11,15 +11,31 @@
     <!-- Milligram CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
     <script src="js/main.js" defer></script>
-    <title>Laboration 2 | PHP</title>
+    <title>Uppgift 2 | PHP</title>
 </head>
 
 <body>
-    <h1>
+    <div>
+        <h1>
+            Information om uppgift 2
+        </h1>
+    </div>
 
-    </h1>
     <main>
-        
+        <h2>Reflektioner kring PHP-språket</h2>
+        <article>
+            <h3>Fördelar och nackdelar med PHP</h3>
+            <p></p>
+        </article>
+        <article>
+            <h3></h3>
+            <p></p>
+        </article>
+        <article>
+            <h3></h3>
+            <p></p>
+        </article>
+
     </main>
     <?php
     echo "Hi!";
@@ -27,10 +43,6 @@
     echo "<p>$name</p>";
     ?>
     <button>Hi</button>
-    <form metod="post">
-
-
-    </form>
     <footer>
         <?= $name; ?>
     </footer>
