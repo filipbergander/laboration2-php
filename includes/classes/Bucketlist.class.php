@@ -30,9 +30,11 @@ class Bucketlist
         return mysqli_query($this->db, $sql);
     }
     // Hämtar alla bucketlist-poster från databasen
-    public function getBucketItems(): string
+    public function getBucketItems(): array
     {
-        return $this->name . " - " . $this->description . " - " . $this->priority;
+        $sql = "SELECT * FROM bucketlist";
+        $result = mysqli_query($this->db, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     // Hämtar en specifik bucketlist-post från databasen baserat på Id
     public function getBucketItemById(int $id): array {}

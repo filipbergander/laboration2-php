@@ -21,8 +21,10 @@ if (isset($_POST["name"])) {
 ?>
 <?php
 $bucketlist = new Bucketlist();
-
-var_dump($bucketlist->addBucketItem("Test", "Provar", 0));
+echo "<pre>";
+var_dump($bucketlist->getBucketItems());
+echo "</pre>";
+//var_dump($bucketlist->addBucketItem("Test", "Provar", 0));
 ?>
 <main class="flex-grow container mx-auto px-4 py-8">
     <form method="post">
