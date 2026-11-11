@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,7 @@
         <h1>
             Information om uppgift 2
         </h1>
+        <?php include_once("includes/mainmenu.php") ?>
     </div>
 
     <main>

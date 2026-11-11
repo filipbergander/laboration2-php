@@ -19,8 +19,8 @@
         <h1>
             AI för utveckling
         </h1>
+        <?php include_once("includes/mainmenu.php") ?>
     </div>
-
     <main>
         <h2>AI-verktyg</h2>
         <article>
@@ -28,7 +28,7 @@
             <p></p>
         </article>
         <article>
-              <h3>Slutsatser av AI som stöd</h3>
+            <h3>Slutsatser av AI som stöd</h3>
             <p></p>
         </article>
         <article>

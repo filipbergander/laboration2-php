@@ -15,17 +15,20 @@
 </head>
 
 <body>
-    <section>
-        <h1>Bucketlist</h1>
-        <?php
-        if (isset($_POST["name"])) {
-            $name = $_POST["name"];
-            echo $name;
-            $priority = $_POST["priority"];
-            echo $priority;
-        }
-        ?>
-    </section>
+    <div>
+        <h1>
+            Bucketlist
+        </h1>
+        <?php include_once("includes/mainmenu.php") ?>
+    </div>
+    <?php
+    if (isset($_POST["name"])) {
+        $name = $_POST["name"];
+        echo $name;
+        $priority = $_POST["priority"];
+        echo $priority;
+    }
+    ?>
     <form method="post">
         <div>
             <label for="name">Skriv namn:</label>
@@ -44,7 +47,7 @@
                 <option value="three">Tre</option>
             </select>
         </div>
-<button type="submit">Lägg till sak</button>
+        <button type="submit">Lägg till sak</button>
     </form>
 </body>
 
