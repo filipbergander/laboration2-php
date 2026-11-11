@@ -19,7 +19,7 @@ class Bucketlist
     // Lägger till en ny bucketlist-post i databasen
     public function addBucketItem(string $name, string $description, int $priority): bool
     {
-        // Validerar inputsen innan en ny post skapas
+        // Validerar inputsen med set-metoderna innan en ny post skapas
         if (!$this->setName($name)) return false;
         if (!$this->setDescription($description)) return false;
         if (!$this->setPriority($priority)) return false;
@@ -37,16 +37,33 @@ class Bucketlist
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     // Hämtar en specifik bucketlist-post från databasen baserat på Id
-    public function getBucketItemById(int $id): array {}
+    public function getBucketItemById(int $id): array {
+         $id = intval($id);
+
+         $sql = "SELECT * FROM bucketlist WHERE id = $id";
+         $result = mysqli_query($this->db, $sql);
+         return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
     // Tar bort en bucketlist-post från databasen
     public function deleteBucketItem(int $id): bool
     {
-        return true;
+        $id = intval($id);
+
+        $sql = "DELETE FROM bucketlist WHERE id = $id;";
+        return mysqli_query($this->db, $sql);
     }
     // Uppdaterar en befintlig bucketlist-post i databasen
     public function updateBucketItem(int $id, string $name, string $description, int $priority): bool
     {
-        return true;
+        // Validerar inputsen med set-metoderna innan en ny post uppdateras
+        if (!$this->setName($name)) return false;
+        if (!$this->setDescription($description)) return false;
+        if (!$this->setPriority($priority)) return false;
+
+        $id = intval($id);
+
+        $sql = "UPDATE bucketlist SET name = '" . $this->name . "', description = '" . $this->description . "', priority = '" . $this->priority . "' WHERE id = $id;";
+        return mysqli_query($this->db, $sql);
     }
 
     // Sätter namnet om det är längre än 0 tecken, annars -> false

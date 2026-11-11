@@ -22,9 +22,20 @@ if (isset($_POST["name"])) {
 <?php
 $bucketlist = new Bucketlist();
 echo "<pre>";
-var_dump($bucketlist->getBucketItems());
+var_dump($bucketlist->getBucketItemById(9));
+echo "</pre>"
+/*
+echo "<pre>";
+var_dump($bucketlist->updateBucketItem(8, "Provar!!!!", "provar att uppdatera", 2));
 echo "</pre>";
-//var_dump($bucketlist->addBucketItem("Test", "Provar", 0));
+/*var_dump($bucketlist->addBucketItem("Test", "Provar", 1));
+echo "<pre>";
+var_dump($bucketlist->deleteBucketItem(1));
+echo "</pre>";
+echo "<pre>";
+var_dump($bucketlist->getBucketItems());
+echo "</pre>";*/
+
 ?>
 <main class="flex-grow container mx-auto px-4 py-8">
     <form method="post">
