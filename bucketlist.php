@@ -12,19 +12,24 @@ include_once("includes/mainmenu.php")
 
 </div>
 <?php
+$bucketlist = new Bucketlist();
 if (isset($_POST["name"])) {
     $name = $_POST["name"];
-    echo $name;
+    $description = $_POST["description"];
     $priority = $_POST["priority"];
-    echo $priority;
+
+    if ($bucketlist->addBucketItem($name, $description, $priority)) {
+        echo "<p>Ny post tillagd!</p>";
+    } else {
+        echo "<p>Fel när posten skulle lagras...</p>";
+    }
 }
 ?>
 <?php
-$bucketlist = new Bucketlist();
+/*
 echo "<pre>";
 var_dump($bucketlist->getBucketItemById(9));
 echo "</pre>"
-/*
 echo "<pre>";
 var_dump($bucketlist->updateBucketItem(8, "Provar!!!!", "provar att uppdatera", 2));
 echo "</pre>";
@@ -51,9 +56,9 @@ echo "</pre>";*/
             <label for="priority">Välj prioritet:</label>
 
             <select id="priority" name="priority">
-                <option value="one">Ett</option>
-                <option value="two">Två</option>
-                <option value="three">Tre</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
             </select>
         </div>
         <button class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded cursor-pointer" type="submit">Lägg till sak</button>
