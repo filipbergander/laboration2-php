@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="sv">
-<?php $title = "Uppgift 2 | PHP"; ?>
+<?php $title; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -10,3 +10,4 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title><?= $title ?></title>
 </head>
+<body class="bg-amber-50 font-sans text-gray-800 min-h-screen flex flex-col">

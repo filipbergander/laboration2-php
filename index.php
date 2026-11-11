@@ -13,14 +13,14 @@ include_once("includes/header.php");
     
     <?php
     include("includes/classes/Bucketlist.class.php");
-    $bucketlist = new Bucketlist("Filip", "Lära mig PHP", 1);
-    echo $bucketlist->getBucketList();
+    //$bucketlist = new Bucketlist("Filip", "Lära mig PHP", 1);
+    //echo $bucketlist->getBucketList();
     ?>
 
-    <main class="container mt-4 mx-auto px-4 py-8">
-        <h2>Reflektioner kring PHP-språket</h2>
+    <main class="container mt-4 py-8">
+        <h2 class="text-lg">Reflektioner kring PHP-språket</h2>
         <article>
-            <h3 class="mt-4">Fördelar och nackdelar med PHP</h3>
+            <h3 class="mt-2">Fördelar och nackdelar med PHP</h3>
             <p></p>
         </article>
         <article>

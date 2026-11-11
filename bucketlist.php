@@ -2,8 +2,6 @@
 $title = "Bucketlist | PHP";
 include_once("includes/header.php");
 ?>
-
-<body>
     <?php include_once("includes/mainmenu.php") ?>
     <div>
         <h1>
@@ -19,7 +17,7 @@ include_once("includes/header.php");
         echo $priority;
     }
     ?>
-    <main>
+    <main class="flex-grow container mx-auto px-4 py-8">
         <form method="post">
             <div>
                 <label for="name">Skriv namn:</label>
