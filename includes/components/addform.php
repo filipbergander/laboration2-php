@@ -19,8 +19,8 @@
                   </select>
               </div>
               <div class="flex justify-center gap-5">
-                  <button type="submit" class="w-fit bg-blue-700 hover:bg-blue-900 text-white font-bold py-4 px-4 mt-4 text-center rounded cursor-pointer">Lägg till sak</button>
-                  <button type="button" id="cancel-btn" class="w-fit bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 mt-4 text-center rounded cursor-pointer">Avbryt</button>
+                  <button type="submit" class="w-fit bg-blue-700 hover:bg-blue-900 text-white font-bold py-4 px-4 mt-4 text-center rounded cursor-pointer transition-colors duration-200 ease-in-out">Lägg till sak</button>
+                  <button type="button" id="cancel-btn" class="w-fit bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 mt-4 text-center rounded cursor-pointer transition-colors duration-200 ease-in-out">Stäng formulär</button>
               </div>
           </fieldset>
       </form>
