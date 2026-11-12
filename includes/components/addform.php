@@ -5,6 +5,16 @@
     $name = "";
     $description = "";
     $priority = 1;
+    $editMode = false;
+    if (isset($_GET['editid'])) {
+        $editId = intval($_GET['editid']);
+        $item = $bucketlist->getBucketItemById($editId);
+        $name = $item['name'];
+        $description = $item['description'];
+        $priority = $item['priority'];
+
+        $editMode = true;
+    }
     if (isset($_POST["name"])) {
         $name = trim($_POST["name"]);
         $description = trim($_POST["description"]);
@@ -45,9 +55,9 @@
         }
     }
     ?>
-    <form method="post" action="" class="rounded-xl bg-green-200 shadow-md p-6 backdrop-blur-3xl">
+    <form method="post" class="rounded-xl bg-green-200 shadow-md p-6 backdrop-blur-3xl">
         <fieldset class="space-y-5">
-            <legend class="mb-4 text-xl font-semibold">Lägg till en ny sak i din Bucketlist</legend>
+            <legend class="mb-4 text-xl font-semibold"><?=  $editMode ? "Redigera sak" : "Lägg till ny sak" ?></legend>
             <div>
                 <label for="name" class="block text-md font-medium mb-1">Skriv namn:</label>
                 <input type="text" id="name" name="name" class="bg-white rounded-md p-2 w-full"
