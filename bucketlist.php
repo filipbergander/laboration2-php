@@ -49,6 +49,23 @@ echo "</pre>";*/
             </div>
         </div>
     </section>
+    <section class="mx-auto bg-gray-100 p-4 rounded-lg shadow-md max-w-lg mb-5">
+        <h2 class="text-2xl font-bold mb-4">Saker i min bucketlist</h2>
+        <?php
+        $bucketItems = $bucketlist->getBucketItems();
+        if (!empty($bucketItems)) {
+            foreach ($bucketItems as $post) {
+                echo '<div class="bg-green-200 p-4 mb-4 rounded-md shadow-md">';
+                echo '<h2 class="text-lg font-bold mb-2">' . htmlspecialchars($post['name']) . '</h2>';
+                echo '<p class="mb-2">' . htmlspecialchars($post['description']) . '</p>';
+                echo '<p class="text-sm text-gray-600">Prioritet: ' . htmlspecialchars($post['priority']) . '</p>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p class="text-gray-600">Din bucketlist är tom. Lägg till en ny sak!</p>';
+        }
+        ?>
+    </section>
     <?php if ($notification): ?>
         <div id="notification" class="flex items-center gap-1 bg-green-300 p-6 right-5 fixed bottom-5 z-50 w-full max-w-48 text-center shadow-lg "><span class="material-symbols-outlined">
                 add_task
