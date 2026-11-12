@@ -37,12 +37,13 @@ class Bucketlist
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     // Hämtar en specifik bucketlist-post från databasen baserat på Id
-    public function getBucketItemById(int $id): array {
-         $id = intval($id);
+    public function getBucketItemById(int $id): array
+    {
+        $id = intval($id);
 
-         $sql = "SELECT * FROM bucketlist WHERE id = $id";
-         $result = mysqli_query($this->db, $sql);
-         return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $sql = "SELECT * FROM bucketlist WHERE id = $id";
+        $result = mysqli_query($this->db, $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     // Tar bort en bucketlist-post från databasen
     public function deleteBucketItem(int $id): bool
@@ -69,7 +70,7 @@ class Bucketlist
     // Sätter namnet om det är längre än 0 tecken, annars -> false
     public function setName(string $name): bool
     {
-        if (strlen($name) > 0) {
+        if (strlen($name) > 3 && strlen($name) < 40) {
             $this->name = $name;
             return true;
         } else {
@@ -79,7 +80,7 @@ class Bucketlist
     // Sätter beskrivning för bucketlist-posten när användaren faktiskt skrivit något (string-length över 0), annars returneras false
     public function setDescription(string $description): bool
     {
-        if (strlen($description) > 0) {
+        if (strlen($description) > 0 && strlen($description) < 400) {
             $this->description = $description;
             return true;
         } else {

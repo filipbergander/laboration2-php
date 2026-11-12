@@ -7,6 +7,11 @@ const cancelBtn = document.getElementById("cancel-btn");
 const modal = document.getElementById("modal");
 const openModalBtn = document.getElementById("add-item-modal");
 const closeModalIcon = document.getElementById("close-modal");
+const resetBtn = document.getElementById("reset-btn");
+const errorMsgContainer = document.getElementById("error-messages");
+const prioritySelect = document.getElementById("priority");
+const nameInput = document.getElementById("name");
+const descriptionInput = document.getElementById("description");
 
 // Öppnar formuläret vid klick på knappen "Lägg till ny sak"
 openModalBtn.addEventListener("click", () => {
@@ -24,6 +29,19 @@ closeModalIcon.addEventListener("click", () => {
 function hideModal() {
     modal.classList.add("hidden");
 }
+
+// Tar bort eventuella felmeddelanden och nollställer inputs när man klickar på "Återställ formulär"
+resetBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    errorMsgContainer.innerHTML = "";
+    descriptionInput.value = "";
+    nameInput.value = "";
+    nameInput.defaultValue = "";
+    descriptionInput.defaultValue = "";
+    // Sätter prioriteten till 1
+    prioritySelect.value = "1";
+    prioritySelect.selectedIndex = 0;
+});
 
 // Döljer notifikationen efter 3 sekunder, detta när man lagt till en ny sak i bucketlisten
 if (notification) {
