@@ -1,5 +1,5 @@
 <?php
-require_once("includes/config.php");
+require_once("../includes/config.php");
 initConfig();
 // Ansluter till databasen
 $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

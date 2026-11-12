@@ -1,15 +1,10 @@
 <?php
 $title = "AI för utveckling | PHP";
-include_once("includes/header.php");
-?>
-<body>     
-    <?php include_once("includes/mainmenu.php") ?>
-    <div>
-        <h1>
-            AI för utveckling
-        </h1>
-   
-    </div>
+$headline = "AI för utveckling";
+include_once("includes/components/header.php");
+include_once("includes/components/mainmenu.php");
+include_once("includes/components/headline.php");
+?>  
     <main>
         <h2>AI-verktyg</h2>
         <article>
@@ -26,7 +21,7 @@ include_once("includes/header.php");
         </article>
 
     </main>
-    <?php include_once("includes/footer.php") ?>
+    <?php include_once("includes/components/footer.php") ?>
 </body>
 
 </html>
