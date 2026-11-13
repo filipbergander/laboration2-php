@@ -32,17 +32,19 @@
             $result = $bucketlist->updateBucketItem($editId, $name, $description, $priority);
 
             if ($result) {
+                echo "<script>window.location.href = 'bucketlist.php?action=edited';</script>";
+                exit;
                 $notification = true;
                 $notificationMsg = "Ändringarna sparades!";
                 $notificationIcon = "work_update";
                 $notificationError = false;
                 $editMode = false; // Stänger formuläret efter att ändringarna har sparats
             } else {
+                $errors[] = "Fel när saken skulle lagras...";
                 $notification = true;
                 $notificationMsg = "Misslyckades med att spara ändringarna.";
                 $notificationIcon = "error";
                 $notificationError = true;
-                $errors[] = "Fel när saken skulle lagras...";
             }
         }
     }

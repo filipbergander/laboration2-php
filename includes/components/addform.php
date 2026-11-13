@@ -30,6 +30,9 @@
             $result = $bucketlist->addBucketItem($name, $description, $priority);
             // Om det gick bra att lägga till en ny post
             if ($result) {
+
+                echo "<script>window.location.href = 'bucketlist.php?action=added';</script>";
+                exit;
                 $notification = true;
                 $name = "";
                 $description = "";
@@ -40,11 +43,14 @@
             else {
                 $errors[] = "Fel när saken skulle lagras...";
                 $notification = false;
+                $notificationMsg = "Kunde inte lägga till saken...";
+                $notificationIcon = "error";
+                $notificationError = true;
             }
         }
     }
     ?>
-    <form method="post" id="bucketlist-form" class="rounded-xl bg-green-200 shadow-md p-6 backdrop-blur-3xl">
+    <form method="post" action="bucketlist.php" id="bucketlist-form" class="rounded-xl bg-green-200 shadow-md p-6 backdrop-blur-3xl">
         <fieldset class="space-y-5">
             <legend class="mb-4 text-xl font-semibold"><?= $editMode ? "Redigera sak" : "Lägg till ny sak" ?></legend>
             <div>

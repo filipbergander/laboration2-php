@@ -57,17 +57,37 @@ if (isset($_GET['deleteid'])) {
     }
 }
 
+// Om ett editid har skickats med i url:en, hämtar den specifika posten och fyller i formuläret med värdena
 if (isset($_GET['editid'])) {
     $editId = intval($_GET['editid']);
     $item = $bucketlist->getBucketItemById($editId)[0];
     $editName = $item['name'];
     $editDescription = $item['description'];
     $editPriority = $item['priority'];
-
     $editMode = true;
-} else if (isset($_POST['editid'])) {
+}
+// När användaren sparar ändringarna 
+else if (isset($_POST['editid'])) {
     $editId = intval($_POST['editid']);
     $editMode = true;
+}
+
+if (isset($_GET['action'])) {
+    $notification = true;
+    $notificationError = false;
+
+    if ($_GET['action'] === 'added') {
+        $notificationMsg = "Ny sak tillagd!";
+        $notificationIcon = "add_task";
+    } elseif ($_GET['action'] === 'edited') {
+        $notificationMsg = "Ändringarna sparades!";
+        $notificationIcon = "work_update";
+    } elseif ($_GET['action'] === 'deleted') {
+        $notificationMsg = "Saken raderades!";
+        $notificationIcon = "delete";
+    }
+
+    echo "<script>window.history.replaceState({}, document.title, window.location.pathname)</script>";
 }
 ?>
 <?php
@@ -100,7 +120,10 @@ if (isset($_GET['editid'])) {
         $bucketItems = $bucketlist->getBucketItems();
         if (!empty($bucketItems)) : ?>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <?php foreach ($bucketItems as $item) : ?>
+                <?php
+
+                // Skriver ut alla bucketlist-poster
+                foreach ($bucketItems as $item) : ?>
                     <article class="bg-green-200 p-4 mb-4 rounded-md shadow-md">
                         <h3 class="text-lg font-bold mb-2"><?= htmlspecialchars($item['name']) ?></h3>
                         <p class="mb-2 text-pretty break-words"><?= htmlspecialchars($item['description']) ?></p>
@@ -128,8 +151,9 @@ if (isset($_GET['editid'])) {
     }
     ?>
 </main>
+<?php 
 
-<?php include_once("includes/components/footer.php") ?>
+include_once("includes/components/footer.php") ?>
 </body>
 
 </html>
