@@ -134,7 +134,7 @@ include_once("includes/components/mainmenu.php");
                             <a href="bucketlist.php?editid=<?= $item['id'] ?>" class="flex items-center text-black font-bold hover:text-gray-700"><span class="material-symbols-outlined">
                                     edit
                                 </span>Redigera</a>
-                            <a href="bucketlist.php?deleteid=<?= $item['id'] ?>" class='flex items-center text-red-500 font-bold hover:text-red-700'><span class="material-symbols-outlined">
+                            <a href="bucketlist.php?deleteid=<?= $item['id'] ?>" class='flex items-center text-red-700 font-bold hover:text-red-800'><span class="material-symbols-outlined">
                                     delete
                                 </span>Radera</a>
                         </div>

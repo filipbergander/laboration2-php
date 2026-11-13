@@ -3,7 +3,7 @@ $title = "Laboration 2";
 $currentPage = basename($_SERVER['PHP_SELF']); // Namn på den sidan som användaren befinner sig på
 ?>
 <nav class=" flex items-center justify-between font-medium text-md md:text-lg lg:text-xl bg-gray-700 text-white p-5 ml-auto w-full">
-    <a class="flex justify-start text-md md:text-xl lg:text-2xl text-yellow-200" href="index.php"> <?= $title ?> </a>
+    <a class="flex justify-start text-md md:text-xl lg:text-2xl text-yellow-200 font-headline" href="index.php"> <?= $title ?> </a>
     <ul class="flex justify-end gap-2 md:gap-4 lg:gap-6">
         <li><a href="index.php" class="<?php if ($currentPage === 'index.php') {
                                             echo 'active';
