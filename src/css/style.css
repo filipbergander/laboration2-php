@@ -5,3 +5,7 @@
     max-height: 250px;
     min-height: 150px;
 }
+
+.active {
+    text-decoration: underline;
+}
