@@ -52,19 +52,19 @@
         }
     }
     ?>
-    <form method="post" action="bucketlist.php" id="bucketlist-form" class="rounded-xl bg-green-200 shadow-md p-6 backdrop-blur-3xl">
+    <form method="post" action="bucketlist.php" id="bucketlist-form" class="w-full max-w-full min-w-0 rounded-xl bg-green-200 shadow-md p-2 sm:p-6 backdrop-blur-3xl">
         <fieldset class="space-y-5">
-            <legend class="mb-4 text-xl font-semibold"><?= $editMode ? "Redigera sak" : "Lägg till ny sak" ?></legend>
-            <div>
+            <legend class="block w-full mb-4 text-xl hyphens-auto font-semibold wrap-break-word"><?= $editMode ? "Redigera sak" : "Lägg till ny sak" ?></legend>
+            <div class="w-full min-w-0">
                 <label for="name" class="block text-md font-medium mb-1">Skriv namn:</label>
-                <input type="text" id="name" name="name" class="bg-white rounded-md p-2 w-full"
+                <input type="text" id="name" name="name" class="block w-full min-w-0 bg-white rounded-md p-2"
                     maxLength="40" placeholder="Vad vill du göra?" value="<?= htmlspecialchars($name ?? '') ?>">
             </div>
-            <div>
+            <div class="w-full min-w-0">
                 <label class="block text-md font-medium mb-1" for="description">Skriv beskrivning: </label>
-                <textarea name="description" class="w-full p-2 resize-y bg-white rounded-md focus:border-green-300" rows="10" placeholder="Beskriv vad du vill uppleva" maxlength="400" id="description"><?= htmlspecialchars($description ?? '') ?></textarea>
+                <textarea name="description" class="block w-full min-w-0 max-w-full box-border p-2 resize-y bg-white rounded-md focus:border-green-300" rows="8" placeholder="Beskriv vad du vill uppleva" maxlength="400" id="description"><?= htmlspecialchars($description ?? '') ?></textarea>
             </div>
-            <div class="mb-6">
+            <div class="w-full min-w-0 mb-6">    
                 <label for="priority" class="block text-md font-medium mb-1">Välj prioritet:</label>
                 <select id="priority" name="priority" class="rounded-md bg-white border p-2 cursor-pointer">
                     <option value="1" <?= $priority == 1 ? 'selected' : '' ?>>1 - Hög</option>
@@ -84,7 +84,7 @@
                     </ul>
                 <?php endif; ?>
             </div>
-            <div class="flex justify-center w-full mt-6">
+            <div class="flex justify-center w-end sm:w-full mt-6">
                 <button
                     id="reset-btn"
                     type="button"
@@ -95,11 +95,11 @@
                     Återställ formulär
                 </button>
             </div>
-            <div class="flex justify-center gap-5">
-                <button type="submit" class="flex items-center gap-1 w-fit bg-blue-700 hover:bg-green-800 text-white font-bold py-4 px-4 mt-4 text-center rounded cursor-pointer transition-colors duration-200 ease-in-out"><span class="material-symbols-outlined">
+            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-5 w-full min-w-0 text-center">
+                <button type="submit" class="flex items-center justify-center gap-1 w-full sm:w-fit bg-blue-700 hover:bg-green-800 text-white text-center font-bold py-4 px-4 mt-4 rounded cursor-pointer transition-colors duration-200 ease-in-out"><span class="material-symbols-outlined">
                         add
                     </span><?= $editMode ? "Spara ändringar" : "Lägg till sak" ?></button>
-                <button type="button" id="cancel-btn" class="flex items-center gap-1 w-fit bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 mt-4 text-center rounded cursor-pointer transition-colors duration-200 ease-in-out"><span class="material-symbols-outlined">
+                <button type="button" id="cancel-btn" class="flex items-center justify-center gap-1 w-full sm:w-fit bg-gray-600 hover:bg-gray-800 text-white font-bold py-4 px-4 mt-4 text-center rounded cursor-pointer transition-colors duration-200 ease-in-out"><span class="material-symbols-outlined">
                         hide
                     </span>Stäng formulär</button>
             </div>

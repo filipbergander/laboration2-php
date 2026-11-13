@@ -102,7 +102,7 @@ include_once("includes/components/mainmenu.php");
         <h2 class="text-2xl font-bold mb-4">Min bucketlist</h2>
         <p class="text-left text-gray-600 mb-2">Vad drömmer du om att göra?</p>
         <button id="add-item-modal" class="bg-blue-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer transition-colors duration-200 ease-in-out">Lägg till ny sak</button>
-        <div id="modal" class="<?= ($editMode || isset($_POST['name']) || isset($_POST['editid']) ? '' : 'hidden') ?> fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 w-full">
+        <div id="modal" class="<?= ($editMode || isset($_POST['name']) || isset($_POST['editid']) ? '' : 'hidden') ?> fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/50 p-3 sm:p-6">
             <div class="w-full max-w-2xl p-6">
                 <?php
                 if ($editMode) {
@@ -126,7 +126,7 @@ include_once("includes/components/mainmenu.php");
                 // Skriver ut alla bucketlist-poster
                 foreach ($bucketItems as $item) : ?>
                     <article class="bg-green-200 p-4 mb-4 rounded-md shadow-md">
-                        <h3 class="text-lg font-bold mb-2"><?= htmlspecialchars($item['name']) ?></h3>
+                        <h3 class="text-lg font-bold mb-2 wrap-break-word"><?= htmlspecialchars($item['name']) ?></h3>
                         <p class="mb-2 text-pretty wrap-break-word"><?= htmlspecialchars($item['description']) ?></p>
                         <p class="text-sm text-gray-800">Prioritet: <?= htmlspecialchars($item['priority']) ?></p>
                         <p class="text-sm text-gray-800 mt-5">Tillagd: <?= date('Y-m-d', strtotime(htmlspecialchars($item['created_at']))) ?></p>

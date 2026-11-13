@@ -55,20 +55,20 @@
     }
     ?>
     <?php if ($editMode): ?>
-        <form method="post" action="bucketlist.php" id="bucketlist-edit-form" class="rounded-xl bg-green-200 shadow-md p-6 backdrop-blur-3xl">
+        <form method="post" action="bucketlist.php" id="bucketlist-edit-form" class="w-full max-w-full min-w-0 rounded-xl bg-green-200 shadow-md p-2 sm:p-6 backdrop-blur-3xl">
             <fieldset class="space-y-5">
-                <legend class="mb-4 text-xl font-semibold">Redigera sak</legend>
+                <legend class="block w-full mb-4 text-xl hyphens-auto font-semibold wrap-break-word">Redigera <?php echo htmlspecialchars($editName ?? ''); ?></legend>
                 <input type="hidden" name="editid" value="<?= htmlspecialchars($editId ?? '') ?>">
-                <div>
+                <div class="w-full min-w-0">
                     <label for="editname" class="block text-md font-medium mb-1">Redigera namn:</label>
-                    <input type="text" id="editname" name="editname" class="bg-white rounded-md p-2 w-full"
+                    <input type="text" id="editname" name="editname" class="block w-full min-w-0 bg-white rounded-md p-2"
                         maxLength="40" placeholder="Vad vill du göra?" value="<?= htmlspecialchars($editName ?? '') ?>">
                 </div>
-                <div>
+             <div class="w-full min-w-0">
                     <label class="block text-md font-medium mb-1" for="editdescription">Redigera beskrivning:</label>
-                    <textarea id="editdescription" name="editdescription" class="w-full p-2 resize-y bg-white rounded-md focus:border-green-300" rows="10" placeholder="Beskriv vad du vill uppleva" maxlength="400" id="editdescription"><?= htmlspecialchars($editDescription ?? '') ?></textarea>
+                    <textarea id="editdescription" name="editdescription" class="block w-full min-w-0 max-w-full box-border p-2 resize-y bg-white rounded-md focus:border-green-300" rows="10" placeholder="Beskriv vad du vill uppleva" maxlength="400" id="editdescription"><?= htmlspecialchars($editDescription ?? '') ?></textarea>
                 </div>
-                <div class="mb-6">
+                     <div class="w-full min-w-0 mb-6">    
                     <label for="editpriority" class="block text-md font-medium mb-1">Ändra prioritet:</label>
                     <select id="editpriority" name="editpriority" class="rounded-md bg-white border p-2 cursor-pointer">
                         <option value="1" <?= $editPriority == 1 ? 'selected' : '' ?>>1 - Hög</option>
@@ -88,11 +88,11 @@
                         </ul>
                     <?php endif; ?>
                 </div>
-                <div class="flex justify-center gap-5">
-                    <button type="submit" id="edit-submit-btn" class="flex items-center gap-1 w-fit bg-blue-700 hover:bg-green-800 text-white font-bold py-4 px-4 mt-4 text-center rounded cursor-pointer transition-colors duration-200 ease-in-out"><span class="material-symbols-outlined">
+                <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-5 w-full min-w-0 text-center">
+                    <button type="submit" id="edit-submit-btn" class="flex items-center justify-center gap-1 w-full sm:w-fit bg-blue-700 hover:bg-green-800 text-white text-center font-bold py-4 px-4 mt-4 rounded cursor-pointer transition-colors duration-200 ease-in-out"><span class="material-symbols-outlined">
                             add
                         </span>Spara ändringar</button>
-                    <button type="button" id="edit-cancel-btn" class="flex items-center gap-1 w-fit bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 mt-4 text-center rounded cursor-pointer transition-colors duration-200 ease-in-out"><span class="material-symbols-outlined">
+                    <button type="button" id="edit-cancel-btn" class="flex items-center justify-center gap-1 w-full sm:w-fit bg-gray-600 hover:bg-gray-800 text-white font-bold py-4 px-4 mt-4 text-center rounded cursor-pointer transition-colors duration-200 ease-in-out"><span class="material-symbols-outlined">
                             hide
                         </span>Stäng formulär</button>
                 </div>
