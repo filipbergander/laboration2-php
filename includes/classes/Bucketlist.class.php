@@ -65,7 +65,7 @@ class Bucketlist
     // Sätter beskrivning för bucketlist-posten när användaren faktiskt skrivit något (string-length över 0), annars returneras false
     public function setDescription(string $description): bool
     {
-        if (strlen($description) > 0 && strlen($description) < 400) {
+        if (strlen($description) > 0 && strlen($description) <= 400) {
             $this->description = $description;
             return true;
         } else {

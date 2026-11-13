@@ -2,3 +2,4 @@
 includes/config.php
 /arkiv.php
 includes/classes/arkiv.php
+node_modules

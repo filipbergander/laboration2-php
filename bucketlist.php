@@ -98,7 +98,7 @@ include_once("includes/components/mainmenu.php");
     <?php
     // Visar rubrik
     include_once("includes/components/headline.php"); ?>
-    <section class="mx-auto max-w-3xl shadow-md my-4 max-w-lg p-2 rounded-lg p-3 md:p-10 bg-white">
+    <section class="mx-auto shadow-md my-4 max-w-lg rounded-lg p-3 md:p-10 bg-white">
         <h2 class="text-2xl font-bold mb-4">Min bucketlist</h2>
         <p class="text-left text-gray-600 mb-2">Vad drömmer du om att göra?</p>
         <button id="add-item-modal" class="bg-blue-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer transition-colors duration-200 ease-in-out">Lägg till ny sak</button>
@@ -127,14 +127,14 @@ include_once("includes/components/mainmenu.php");
                 foreach ($bucketItems as $item) : ?>
                     <article class="bg-green-200 p-4 mb-4 rounded-md shadow-md">
                         <h3 class="text-lg font-bold mb-2"><?= htmlspecialchars($item['name']) ?></h3>
-                        <p class="mb-2 text-pretty break-words"><?= htmlspecialchars($item['description']) ?></p>
+                        <p class="mb-2 text-pretty wrap-break-word"><?= htmlspecialchars($item['description']) ?></p>
                         <p class="text-sm text-gray-800">Prioritet: <?= htmlspecialchars($item['priority']) ?></p>
                         <p class="text-sm text-gray-800 mt-5">Tillagd: <?= date('Y-m-d', strtotime(htmlspecialchars($item['created_at']))) ?></p>
                         <div class="flex items-center justify-end gap-5 mt-4">
-                            <a href="bucketlist.php?editid=<?= $item['id'] ?>" class="flex items-center text-black font-bold"><span class="material-symbols-outlined">
+                            <a href="bucketlist.php?editid=<?= $item['id'] ?>" class="flex items-center text-black font-bold hover:text-gray-700"><span class="material-symbols-outlined">
                                     edit
                                 </span>Redigera</a>
-                            <a href="bucketlist.php?deleteid=<?= $item['id'] ?>" class='flex items-center text-red-500 font-bold'><span class="material-symbols-outlined">
+                            <a href="bucketlist.php?deleteid=<?= $item['id'] ?>" class='flex items-center text-red-500 font-bold hover:text-red-700'><span class="material-symbols-outlined">
                                     delete
                                 </span>Radera</a>
                         </div>
