@@ -8,8 +8,6 @@ include_once("includes/components/mainmenu.php");
 
 <?php
 include("includes/classes/Bucketlist.class.php");
-//$bucketlist = new Bucketlist("Filip", "Lära mig PHP", 1);
-//echo $bucketlist->getBucketList();
 ?>
 
 <main class="container w-full mx-auto max-w-lg mt-5">

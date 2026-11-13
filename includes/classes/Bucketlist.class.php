@@ -70,7 +70,7 @@ class Bucketlist
     // Sätter namnet om det är längre än 0 tecken, annars -> false
     public function setName(string $name): bool
     {
-        if (strlen($name) > 3 && strlen($name) < 40) {
+        if (strlen($name) >= 3 && strlen($name) < 40) {
             $this->name = $name;
             return true;
         } else {

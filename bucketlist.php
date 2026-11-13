@@ -1,23 +1,78 @@
 <?php
-require_once("includes/config.php"); // Hämtar in konfigurationsfilen
-initConfig(); // Kör konfigurationen
+// Hämtar in konfigurationsfilen och kör konfigurationen
+require_once("includes/config.php");
+initConfig();
+
+// Visar komponenter för header och huvudmenyn
 $title = "Bucketlist | PHP";
 $headline = "Bucketlist";
 include_once("includes/components/header.php");
 include_once("includes/components/mainmenu.php");
-$bucketlist = new Bucketlist(); // Skapar ett ny instans
+
+// Skapar en ny instans av bucketlist och nollställer variabler för redigeringsläge
+$bucketlist = new Bucketlist();
+$editId = "";
+$editDescription = "";
+$editName = "";
+$editPriority = 1;
 $editMode = false;
+
+// Sätter standarvärden för notifkationsmeddelandet
+$notification = false;
+$notificationMsg = "Ny sak tillagd!";
+$notificationIcon = "add_task";
+$notificationError = false; // För att visa en röd eller grön meddelande ruta
+
+// Funktion för visa ett meddelande när en sak har lagts till, uppdaterats eller raderats
+function displayNotification(string $message, string $icon, bool $isError = false)
+{
+    $backgroundColor = $isError ? 'bg-red-300' : 'bg-green-300'; ?>
+    <div id="notification" class="flex items-center justify-center gap-1 <?= $backgroundColor ?> p-6 right-5 fixed bottom-5 z-50 w-full max-w-fit px-8 text-center shadow-lg rounded-md">
+        <span class="material-symbols-outlined">
+            <?= htmlspecialchars($icon) ?>
+        </span>
+        <p class="font-bold whitespace-nowrap">
+            <?= htmlspecialchars($message) ?>
+        </p>
+    </div>
+<?php }
+
+
+// Raderar en bucketlist-post om deleteid har skickats med i url:en
 if (isset($_GET['deleteid'])) {
     $deleteid = intval($_GET['deleteid']);
+    $notification = true;
 
     if ($bucketlist->deleteBucketItem($deleteid)) {
-        echo "<p class='text-green-700 font-semibold'>Bucketlist-posten med ID $deleteid har raderats.</p>";
+        $notificationMsg = "Saken raderades!";
+        $notificationIcon = "delete";
+        $notificationError = false;
+        // Tar bort deleteid:et från url:en
+        echo "<script>window.history.replaceState({}, document.title, window.location.pathname)</script>";
     } else {
-        echo "<p class='text-red-700 font-semibold'>Misslyckades med att radera bucketlist-posten med ID $deleteid.</p>";
+        // Visar en röd bakgrundsfärg och annan text om raderingen skulle misslyckas
+        $notificationMsg = "Misslyckades med att radera saken.";
+        $notificationIcon = "error";
+        $notificationError = true;
     }
 }
-?>
 
+if (isset($_GET['editid'])) {
+    $editId = intval($_GET['editid']);
+    $item = $bucketlist->getBucketItemById($editId)[0];
+    $editName = $item['name'];
+    $editDescription = $item['description'];
+    $editPriority = $item['priority'];
+
+    $editMode = true;
+} else if (isset($_POST['editid'])) {
+    $editId = intval($_POST['editid']);
+    $editMode = true;
+}
+?>
+<?php
+
+?>
 <main class="w-full mx-auto max-w-7xl mt-5">
     <?php include_once("includes/components/headline.php"); ?>
 
@@ -25,9 +80,16 @@ if (isset($_GET['deleteid'])) {
         <h2 class="text-2xl font-bold mb-4">Min bucketlist</h2>
         <p class="text-left text-gray-600 mb-2">Vad drömmer du om att göra?</p>
         <button id="add-item-modal" class="bg-blue-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer transition-colors duration-200 ease-in-out">Lägg till ny sak</button>
-        <div id="modal" class="<?= isset($_POST['name']) ? '' : 'hidden' ?> fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 w-full">
+        <div id="modal" class="<?= ($editMode || isset($_POST['name']) || isset($_POST['editid']) ? '' : 'hidden') ?> fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 w-full">
             <div class="w-full max-w-2xl p-6">
-                <?php include_once("includes/components/addform.php") ?>
+                <?php
+                if ($editMode) {
+                    include("includes/components/editform.php");
+                }
+                if (!$editMode) {
+                    include("includes/components/addform.php");
+                }
+                ?>
             </div>
         </div>
     </section>
@@ -59,14 +121,12 @@ if (isset($_GET['deleteid'])) {
             <p class="text-red-700 font-semibold">Din bucketlist är tom. Lägg till en ny sak!</p>
         <?php endif; ?>
     </section>
-
-    <?php if ($notification): ?>
-        <div id="notification" class="flex items-center gap-1 bg-green-300 p-6 right-5 fixed bottom-5 z-50 w-full max-w-48 text-center shadow-lg "><span class="material-symbols-outlined">
-                add_task
-            </span>
-            <p class="font-bold whitespace-nowrap">Ny sak tillagd!</p>
-        </div>
-    <?php endif; ?>
+    <!-- Ändrar notifikationsmeddelande beroende på radering, uppdatering eller lägga till ny sak i bucketlistan -->
+    <?php
+    if ($notification) {
+        displayNotification($notificationMsg, $notificationIcon, $notificationError);
+    }
+    ?>
 </main>
 
 <?php include_once("includes/components/footer.php") ?>
