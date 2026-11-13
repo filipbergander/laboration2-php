@@ -3,15 +3,14 @@ require_once("../includes/config.php");
 initConfig();
 // Ansluter till databasen
 $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-//$db = new mysqli("localhost", "bucketlist", "rootroot", "bucketlist");
 
 // Kontrollerar om anslutningen lyckades eller inte
 if ($db->connect_errno > 0) {
     die("Anslutningen misslyckades: " . $db->connect_error);
 }
 
+// Skapar tabellen bucketlist
 $sql = "Drop TABLE IF EXISTS bucketlist;";
-
 $sql .= "
 CREATE TABLE IF NOT EXISTS bucketlist(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -23,7 +22,6 @@ CREATE TABLE IF NOT EXISTS bucketlist(
 ";
 
 echo "<pre>$sql</pre>";
-
 if ($db->multi_query($sql)) {
     echo "Tabellen bucketlist installerades!";
 } else {

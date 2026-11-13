@@ -1,14 +1,7 @@
-#description {
-    max-height: 300px;
-    min-height: 150px;
-}
+/* Max och min höjd för beskrivningsinput */
 
-.delete-btn {
-    background-color: #dc2626;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+#description,
+#editdescription {
+    max-height: 250px;
+    min-height: 150px;
 }

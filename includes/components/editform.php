@@ -1,8 +1,10 @@
+    <!-- Komponent som visar formuläret för att redigera en sak i bucketlistan -->
     <?php
     $notification = false;
     $errors = [];
     $editMode = true;
 
+    // När användaren ska spara ändringarna i en post, valideras inputsen och uppdateras sedan i databasen
     if (isset($_POST["editid"])) {
         $editId = intval($_POST['editid']);
         $name = trim($_POST["editname"]);
@@ -14,7 +16,7 @@
         $editDescription = $description;
         $editPriority = $priority;
 
-        // Lägg till felmeddelande i arrayen
+        // Lägger till felmeddelanden när inputs inte valideras korrekt
         if (!$bucketlist->setName($editName)) {
             $success = false;
             $errors[] = "Namnet måste vara mellan 3 och 40 tecken.";
@@ -32,14 +34,17 @@
             $result = $bucketlist->updateBucketItem($editId, $name, $description, $priority);
 
             if ($result) {
+                // Skickar med action i url:en för att visa ett meddelande om att posten har uppdaterats
                 echo "<script>window.location.href = 'bucketlist.php?action=edited';</script>";
                 exit;
                 $notification = true;
                 $notificationMsg = "Ändringarna sparades!";
                 $notificationIcon = "work_update";
                 $notificationError = false;
-                $editMode = false; // Stänger formuläret efter att ändringarna har sparats
-            } else {
+                $editMode = false;
+            }
+            // Annars visa felmeddelande
+            else {
                 $errors[] = "Fel när saken skulle lagras...";
                 $notification = true;
                 $notificationMsg = "Misslyckades med att spara ändringarna.";
@@ -61,7 +66,7 @@
                 </div>
                 <div>
                     <label class="block text-md font-medium mb-1" for="editdescription">Redigera beskrivning:</label>
-                    <textarea name="editdescription" class="w-full p-2 resize-y bg-white rounded-md focus:border-green-300" rows="10" placeholder="Beskriv vad du vill uppleva" maxlength="400" id="editdescription"><?= htmlspecialchars($editDescription ?? '') ?></textarea>
+                    <textarea id="editdescription" name="editdescription" class="w-full p-2 resize-y bg-white rounded-md focus:border-green-300" rows="10" placeholder="Beskriv vad du vill uppleva" maxlength="400" id="editdescription"><?= htmlspecialchars($editDescription ?? '') ?></textarea>
                 </div>
                 <div class="mb-6">
                     <label for="editpriority" class="block text-md font-medium mb-1">Ändra prioritet:</label>
@@ -74,6 +79,7 @@
                 <div id="error-messages">
                     <?php if (!empty($errors)) : ?>
                         <ul class="list-disc list-inside">
+                            <!-- Skriver ut felmeddelanden -->
                             <?php foreach ($errors as $error) : ?>
                                 <li class="text-red-700 font-semibold mb-1">
                                     <?= htmlspecialchars($error) ?>
@@ -82,17 +88,6 @@
                         </ul>
                     <?php endif; ?>
                 </div>
-                <!-- <div class="flex justify-center w-full mt-6">
-                <button
-                    id="reset-btn"
-                    type="button"
-                    class="flex items-center gap-1 w-fit p-2 bg-gray-200 border-2 hover:bg-white text-gray-800 rounded-md transition-colors duration-200 ease-in-out cursor-pointer">
-                    <span class="material-symbols-outlined">
-                        refresh
-                    </span>
-                    Återställ formulär
-                </button>
-            </div>-->
                 <div class="flex justify-center gap-5">
                     <button type="submit" id="edit-submit-btn" class="flex items-center gap-1 w-fit bg-blue-700 hover:bg-green-800 text-white font-bold py-4 px-4 mt-4 text-center rounded cursor-pointer transition-colors duration-200 ease-in-out"><span class="material-symbols-outlined">
                             add
@@ -107,6 +102,7 @@
             </fieldset>
         </form>
     <?php else: ?>
+        <!-- Om man inte ska redigera formuläret så hålls det dolt -->
         <script>
             document.getElementById('modal').classList.add('hidden');
             window.history.replaceState({}, document.title, window.location.pathname);

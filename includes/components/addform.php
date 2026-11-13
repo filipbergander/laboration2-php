@@ -1,3 +1,4 @@
+    <!-- Komponent som visar formuläret för att lägga till en ny sak i bucketlistan -->
     <?php
     if (!isset($notification)) $notification = false;
     if (!isset($errors)) $errors = [];
@@ -6,6 +7,7 @@
     $description = "";
     $priority = 1;
 
+    // När användaren skapar en ny post i bucketlistan, valideras inputsen och läggs till i databasen
     if (isset($_POST["name"])) {
         $name = trim($_POST["name"]);
         $description = trim($_POST["description"]);
@@ -30,14 +32,14 @@
             $result = $bucketlist->addBucketItem($name, $description, $priority);
             // Om det gick bra att lägga till en ny post
             if ($result) {
-
+                // Skickar med action i url:en för att visa ett meddelande om att posten har lagts till
                 echo "<script>window.location.href = 'bucketlist.php?action=added';</script>";
                 exit;
-                $notification = true;
+                /*$notification = true;
                 $name = "";
                 $description = "";
                 $priority = 1;
-                $errors = [];
+                $errors = [];*/
             }
             // Annars visa felmeddelande
             else {
@@ -73,6 +75,7 @@
             <div id="error-messages">
                 <?php if (!empty($errors)) : ?>
                     <ul class="list-disc list-inside">
+                        <!-- Skriver ut felmeddelanden -->
                         <?php foreach ($errors as $error) : ?>
                             <li class="text-red-700 font-semibold mb-1">
                                 <?= htmlspecialchars($error) ?>

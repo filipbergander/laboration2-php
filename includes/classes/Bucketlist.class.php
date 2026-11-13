@@ -1,22 +1,18 @@
 <?php
-
 class Bucketlist
 {
     // Variabler
-    private mysqli $db;
+    private BucketStorage $storage;
     private string $name;
     private string $description;
     private int $priority;
 
-    // Initierar ett nytt objekt med konstruktorn
-    function __construct()
+    // Initierar ett nytt Bucketstorage-objekt med konstruktorn
+    function __construct(BucketStorage $storage)
     {
-        $this->db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-        if ($this->db->connect_errno > 0) {
-            die("Anslutningen misslyckades: " . $this->db->connect_error);
-        }
+        $this->storage = $storage;
     }
-    // Lägger till en ny bucketlist-post i databasen
+    // Lägger till en ny bucketlist-post
     public function addBucketItem(string $name, string $description, int $priority): bool
     {
         // Validerar inputsen med set-metoderna innan en ny post skapas
@@ -24,36 +20,26 @@ class Bucketlist
         if (!$this->setDescription($description)) return false;
         if (!$this->setPriority($priority)) return false;
 
-        // Lägger till den nya posten i databasen
-        $sql = "INSERT INTO bucketlist (name, description, priority) VALUES ('" . $this->name . "', '" . $this->description . "', '" . $this->priority . "');";
-
-        return mysqli_query($this->db, $sql);
+        return $this->storage->insertBucketItem($this->name, $this->description, $this->priority);
     }
-    // Hämtar alla bucketlist-poster från databasen
+    // Hämtar alla bucketlist-poster
     public function getBucketItems(): array
     {
-        $sql = "SELECT * FROM bucketlist";
-        $result = mysqli_query($this->db, $sql);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $this->storage->fetchBucketItems();
     }
-    // Hämtar en specifik bucketlist-post från databasen baserat på Id
+    // Hämtar en specifik bucketlist-post baserat på Id
     public function getBucketItemById(int $id): array
     {
         $id = intval($id);
-
-        $sql = "SELECT * FROM bucketlist WHERE id = $id";
-        $result = mysqli_query($this->db, $sql);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $this->storage->fetchBucketItemById($id);
     }
-    // Tar bort en bucketlist-post från databasen
+    // Tar bort en bucketlist-post
     public function deleteBucketItem(int $id): bool
     {
         $id = intval($id);
-
-        $sql = "DELETE FROM bucketlist WHERE id = $id;";
-        return mysqli_query($this->db, $sql);
+        return $this->storage->removeBucketItem($id);
     }
-    // Uppdaterar en befintlig bucketlist-post i databasen
+    // Uppdaterar en befintlig bucketlist-post
     public function updateBucketItem(int $id, string $name, string $description, int $priority): bool
     {
         // Validerar inputsen med set-metoderna innan en ny post uppdateras
@@ -63,8 +49,7 @@ class Bucketlist
 
         $id = intval($id);
 
-        $sql = "UPDATE bucketlist SET name = '" . $this->name . "', description = '" . $this->description . "', priority = '" . $this->priority . "' WHERE id = $id;";
-        return mysqli_query($this->db, $sql);
+        return $this->storage->saveBucketItemChanges($id, $this->name, $this->description, $this->priority);
     }
 
     // Sätter namnet om det är längre än 0 tecken, annars -> false
@@ -96,10 +81,5 @@ class Bucketlist
         } else {
             return false;
         }
-    }
-    // Destructor som stänger databasanslutningen
-    function __destruct()
-    {
-        mysqli_close($this->db);
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php // Komponent som visar huvudmenyn i webbplatsen
 $title = "Laboration 2 | PHP";
 ?>
     <nav class=" flex items-center justify-between font-medium text-lg bg-gray-700 text-white p-5 ml-auto w-full">

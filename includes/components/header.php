@@ -1,3 +1,4 @@
+<!-- Komponent som skriver ut sidhuvudet på varje sida i webbplatsen -->
 <!DOCTYPE html>
 <html lang="sv">
 <?php $title; ?>

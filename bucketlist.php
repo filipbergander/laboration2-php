@@ -3,14 +3,10 @@
 require_once("includes/config.php");
 initConfig();
 
-// Visar komponenter för header och huvudmenyn
-$title = "Bucketlist | PHP";
-$headline = "Bucketlist";
-include_once("includes/components/header.php");
-include_once("includes/components/mainmenu.php");
-
+$db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$storage = new BucketStorage($db);
 // Skapar en ny instans av bucketlist och nollställer variabler för redigeringsläge
-$bucketlist = new Bucketlist();
+$bucketlist = new Bucketlist($storage);
 $editId = "";
 $editDescription = "";
 $editName = "";
@@ -60,7 +56,7 @@ if (isset($_GET['deleteid'])) {
 // Om ett editid har skickats med i url:en, hämtar den specifika posten och fyller i formuläret med värdena
 if (isset($_GET['editid'])) {
     $editId = intval($_GET['editid']);
-    $item = $bucketlist->getBucketItemById($editId)[0];
+    $item = $bucketlist->getBucketItemById($editId);
     $editName = $item['name'];
     $editDescription = $item['description'];
     $editPriority = $item['priority'];
@@ -72,6 +68,7 @@ else if (isset($_POST['editid'])) {
     $editMode = true;
 }
 
+// Om en action har skickats med i url:en, visar den ett meddelande beroende på vad som har gjorts (added, edited, deleted)
 if (isset($_GET['action'])) {
     $notification = true;
     $notificationError = false;
@@ -86,16 +83,21 @@ if (isset($_GET['action'])) {
         $notificationMsg = "Saken raderades!";
         $notificationIcon = "delete";
     }
-
+    // Tar bort action-delens namn i url:en,
     echo "<script>window.history.replaceState({}, document.title, window.location.pathname)</script>";
 }
 ?>
 <?php
-
+// Visar komponenter för header och huvudmenyn
+$title = "Bucketlist | PHP";
+$headline = "Bucketlist";
+include_once("includes/components/header.php");
+include_once("includes/components/mainmenu.php");
 ?>
 <main class="w-full mx-auto max-w-7xl mt-5">
-    <?php include_once("includes/components/headline.php"); ?>
-
+    <?php
+    // Visar rubrik
+    include_once("includes/components/headline.php"); ?>
     <section class="mx-auto max-w-3xl shadow-md my-4 max-w-lg p-2 rounded-lg p-3 md:p-10 bg-white">
         <h2 class="text-2xl font-bold mb-4">Min bucketlist</h2>
         <p class="text-left text-gray-600 mb-2">Vad drömmer du om att göra?</p>
@@ -113,15 +115,14 @@ if (isset($_GET['action'])) {
             </div>
         </div>
     </section>
-
     <section class="mx-auto bg-gray-100 p-4 rounded-lg shadow-md max-w-5xl mt-5 mb-5">
         <h2 class="text-2xl font-bold mb-4">Tillagda drömmar och mål:</h2>
         <?php
+        // Hämtar in alla bucketlist-poster
         $bucketItems = $bucketlist->getBucketItems();
         if (!empty($bucketItems)) : ?>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <?php
-
                 // Skriver ut alla bucketlist-poster
                 foreach ($bucketItems as $item) : ?>
                     <article class="bg-green-200 p-4 mb-4 rounded-md shadow-md">
@@ -151,8 +152,8 @@ if (isset($_GET['action'])) {
     }
     ?>
 </main>
-<?php 
-
+<?php
+// Visar footern
 include_once("includes/components/footer.php") ?>
 </body>
 

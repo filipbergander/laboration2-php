@@ -1,4 +1,5 @@
 <?php
+// Visar komponenter i UI
 $title = "Startsida | PHP";
 $headline = "Information uppgift 2";
 include_once("includes/components/header.php");
@@ -7,11 +8,14 @@ include_once("includes/components/mainmenu.php");
 
 
 <?php
+// Hämtar in klass-filen
 include("includes/classes/Bucketlist.class.php");
 ?>
 
 <main class="container w-full mx-auto max-w-lg mt-5">
-    <?php include_once("includes/components/headline.php"); ?>
+    <?php
+    // Visar rubrik
+    include_once("includes/components/headline.php"); ?>
     <section class="bg-amber-500 p-4">
         <h2 class="text-2xl font-bold mb-6">Reflektioner kring PHP-språket</h2>
         <article class="mb-2 bg-white p-2 rounded-md">
@@ -28,7 +32,9 @@ include("includes/classes/Bucketlist.class.php");
         </article>
     </section>
 </main>
-<?php include_once("includes/components/footer.php") ?>
+<?php
+// Visar footer
+include_once("includes/components/footer.php") ?>
 </body>
 
 </html>
