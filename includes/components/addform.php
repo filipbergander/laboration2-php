@@ -43,7 +43,7 @@
             }
             // Annars visa felmeddelande
             else {
-                $errors[] = "Fel när saken skulle lagras...";
+                $errors[] = "Fel när saken skulle lagras i databasen...";
                 $notification = false;
                 $notificationMsg = "Kunde inte lägga till saken...";
                 $notificationIcon = "error";
@@ -57,7 +57,7 @@
             <legend class="block w-full mb-4 text-xl hyphens-auto font-semibold wrap-break-word"><?= $editMode ? "Redigera sak" : "Lägg till ny sak" ?></legend>
             <div class="w-full min-w-0">
                 <label for="name" class="block text-md font-medium mb-1">Skriv namn:</label>
-                <input type="text" id="name" name="name" class="block w-full min-w-0 bg-white rounded-md p-2"
+                <input type="text" id="name" name="name" autocomplete="off" class="block w-full min-w-0 bg-white rounded-md p-2"
                     maxLength="40" placeholder="Vad vill du göra?" value="<?= htmlspecialchars($name ?? '') ?>">
             </div>
             <div class="w-full min-w-0">

@@ -10,8 +10,8 @@ if ($db->connect_errno > 0) {
 }
 
 // Skapar tabellen bucketlist
-$sql = "Drop TABLE IF EXISTS bucketlist;";
-$sql .= "
+//$sql = "Drop TABLE IF EXISTS bucketlist;";
+$sql = "
 CREATE TABLE IF NOT EXISTS bucketlist(
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(128) NOT NULL,
@@ -21,8 +21,7 @@ CREATE TABLE IF NOT EXISTS bucketlist(
     );
 ";
 
-echo "<pre>$sql</pre>";
-if ($db->multi_query($sql)) {
+if ($db->query($sql)) {
     echo "Tabellen bucketlist installerades!";
 } else {
     echo "Fel när tabellen försökte skapas: " . $db->error;

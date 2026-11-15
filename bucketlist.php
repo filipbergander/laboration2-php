@@ -103,7 +103,7 @@ include_once("includes/components/mainmenu.php");
         <p class="text-left text-gray-600 mb-2">Vad drömmer du om att göra?</p>
         <button id="add-item-modal" class="bg-blue-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer transition-colors duration-200 ease-in-out">Lägg till ny sak</button>
         <div id="modal" class="<?= ($editMode || isset($_POST['name']) || isset($_POST['editid']) ? '' : 'hidden') ?> fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/50 p-3 sm:p-6">
-            <div class="w-full max-w-2xl p-6">
+            <div class="w-full max-w-2xl md:p-6">
                 <?php
                 if ($editMode) {
                     include("includes/components/editform.php");
@@ -120,29 +120,31 @@ include_once("includes/components/mainmenu.php");
         <?php
         // Hämtar in alla bucketlist-poster
         $bucketItems = $bucketlist->getBucketItems();
-        if (!empty($bucketItems)) : ?>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <?php
-                // Skriver ut alla bucketlist-poster
-                foreach ($bucketItems as $item) : ?>
-                    <article class="bg-green-200 p-4 mb-4 rounded-md shadow-md">
-                        <h3 class="text-lg font-bold mb-2 wrap-break-word"><?= htmlspecialchars($item['name']) ?></h3>
-                        <p class="mb-2 text-pretty wrap-break-word"><?= htmlspecialchars($item['description']) ?></p>
-                        <p class="text-sm text-gray-800">Prioritet: <?= htmlspecialchars($item['priority']) ?></p>
-                        <p class="text-sm text-gray-800 mt-5">Tillagd: <?= date('Y-m-d', strtotime(htmlspecialchars($item['created_at']))) ?></p>
-                        <div class="flex items-center justify-end gap-5 mt-4">
-                            <a href="bucketlist.php?editid=<?= $item['id'] ?>" class="flex items-center text-black font-bold hover:text-gray-700"><span class="material-symbols-outlined">
-                                    edit
-                                </span>Redigera</a>
-                            <a href="bucketlist.php?deleteid=<?= $item['id'] ?>" class='flex items-center text-red-700 font-bold hover:text-red-800'><span class="material-symbols-outlined">
-                                    delete
-                                </span>Radera</a>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        <?php else : ?>
+        if ($bucketItems === null) : ?>
+            <p class="text-red-700 font-semibold">Fel när bucketlist-posterna skulle hämtas från databasen. Kontrollera att databasen är korrekt konfigurerad.</p>
+        <?php elseif (empty($bucketItems)) : ?>
             <p class="text-red-700 font-semibold">Din bucketlist är tom. Lägg till en ny sak!</p>
+        <?php else : ?>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <?php
+                    // Skriver ut alla bucketlist-poster
+                    foreach ($bucketItems as $item) : ?>
+                        <article class="bg-green-200 p-4 mb-4 rounded-md shadow-md">
+                            <h3 class="text-lg font-bold mb-2 wrap-break-word"><?= htmlspecialchars($item['name']) ?></h3>
+                            <p class="mb-2 text-pretty wrap-break-word"><?= htmlspecialchars($item['description']) ?></p>
+                            <p class="text-sm md:text-md text-amber-800 font-bold">Prio: <?= htmlspecialchars($item['priority']) ?></p>
+                            <p class="text-sm text-gray-800 mt-5">Tillagd: <?= date('Y-m-d', strtotime(htmlspecialchars($item['created_at']))) ?></p>
+                            <div class="flex items-center justify-end gap-5 mt-4">
+                                <a href="bucketlist.php?editid=<?= $item['id'] ?>" class="flex items-center text-black font-bold hover:text-gray-700"><span class="material-symbols-outlined">
+                                        edit
+                                    </span>Redigera</a>
+                                <a href="bucketlist.php?deleteid=<?= $item['id'] ?>" class='flex items-center text-red-700 font-bold hover:text-red-800'><span class="material-symbols-outlined">
+                                        delete
+                                    </span>Radera</a>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+            </div>
         <?php endif; ?>
     </section>
     <!-- Ändrar notifikationsmeddelande beroende på radering, uppdatering eller lägga till ny sak i bucketlistan -->

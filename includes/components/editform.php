@@ -37,11 +37,11 @@
                 // Skickar med action i url:en för att visa ett meddelande om att posten har uppdaterats
                 echo "<script>window.location.href = 'bucketlist.php?action=edited';</script>";
                 exit;
-                $notification = true;
+                /*$notification = true;
                 $notificationMsg = "Ändringarna sparades!";
                 $notificationIcon = "work_update";
                 $notificationError = false;
-                $editMode = false;
+                $editMode = false;*/
             }
             // Annars visa felmeddelande
             else {
@@ -57,7 +57,7 @@
     <?php if ($editMode): ?>
         <form method="post" action="bucketlist.php" id="bucketlist-edit-form" class="w-full max-w-full min-w-0 rounded-xl bg-green-200 shadow-md p-2 sm:p-6 backdrop-blur-3xl">
             <fieldset class="space-y-5">
-                <legend class="block w-full mb-4 text-xl hyphens-auto font-semibold wrap-break-word">Redigera <?php echo htmlspecialchars($editName ?? ''); ?></legend>
+                <legend class="block w-full mb-4 text-xl hyphens-auto font-semibold wrap-break-word">Redigera '<?php echo htmlspecialchars($editName ?? ''); ?>'</legend>
                 <input type="hidden" name="editid" value="<?= htmlspecialchars($editId ?? '') ?>">
                 <div class="w-full min-w-0">
                     <label for="editname" class="block text-md font-medium mb-1">Redigera namn:</label>

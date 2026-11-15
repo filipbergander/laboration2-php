@@ -16,19 +16,16 @@ include("includes/classes/Bucketlist.class.php");
     <?php
     // Visar rubrik
     include_once("includes/components/headline.php"); ?>
-    <section class="bg-amber-500 p-4">
+    <section class="bg-amber-500 p-4 mb-5">
         <h2 class="text-2xl font-bold mb-6">Reflektioner kring PHP-språket</h2>
         <article class="mb-2 bg-white p-2 rounded-md">
             <h3 class="text-lg font-bold">Hur upplever jag PHP?</h3>
-            <p>Jag valde</p>
+            <p>PHP upplevs som ett ganska enkelt språk att komma igång med, särskilt när man kan integrera HTML-kod tillsammans med PHP-kod. Däremot upplevde jag syntaxen som lite krånglig ibland, särskilt när man arbetar med interpolation och variabler. Till exempel med alla punkter och citiationstecken, "" och '', som ibland kan behövas. <br><br> Att bara infoga en variabel i HTML-koden var dock simpelt.</p>
         </article>
         <article class="mb-2 bg-white p-2 rounded-md">
             <h3 class="text-lg font-bold">Fördelar och nackdelar med PHP</h3>
-            <p>Testtest</p>
-        </article>
-        <article class="mb-2 bg-white p-2">
-            <h3 class="text-lg font-bold">Test</h3>
-            <p>test</p>
+            <p><b>Fördel:</b> Kändes smidigt att skapa egna komponenter och återanvända koden på olika sidor i webbplatsen. Hanteringen av hela webbplatsen blev mer strukturerad genom komponenterna. Det var också enkelt att hantera databasanslutningar och utföra databasoperationer samt ändra dem i efterhand. Felmeddelanden som visas är tydliga och hjälpsamma, jag använde "var_dump" för att felsöka mycket av min kod.<br><br>
+        <b>Nackdel:</b> Det var dock lite längre syntax jämfört med C# för att skapa databasanslutningar, exempelvis när SQL-kommandon behövde skrivas i koden. Å andra sidan är SQL-koden tydlig i vad den gör, men att i C# är det mer förenklat. Tycker även att i C# är det smidigare att skriva getters och setters.</p>
         </article>
     </section>
 </main>

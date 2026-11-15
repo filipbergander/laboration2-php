@@ -8,9 +8,14 @@ class Bucketlist
     private int $priority;
 
     // Initierar ett nytt Bucketstorage-objekt med konstruktorn
-    function __construct(BucketStorage $storage)
+    function __construct(?BucketStorage $storage = null)
     {
-        $this->storage = $storage;
+        if ($storage === null) {
+            $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+            $this->storage = new BucketStorage($db);
+        } else {
+            $this->storage = $storage;
+        }
     }
     // Lägger till en ny bucketlist-post
     public function addBucketItem(string $name, string $description, int $priority): bool
@@ -23,14 +28,17 @@ class Bucketlist
         return $this->storage->insertBucketItem($this->name, $this->description, $this->priority);
     }
     // Hämtar alla bucketlist-poster
-    public function getBucketItems(): array
+    public function getBucketItems(): ?array
     {
         return $this->storage->fetchBucketItems();
     }
     // Hämtar en specifik bucketlist-post baserat på Id
-    public function getBucketItemById(int $id): array
+    public function getBucketItemById(int $id): ?array
     {
         $id = intval($id);
+        if ($id <= 0) {
+            return null; // Returnerar null om id är ogiltigt
+        }
         return $this->storage->fetchBucketItemById($id);
     }
     // Tar bort en bucketlist-post
