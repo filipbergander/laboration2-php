@@ -18,7 +18,7 @@ Länk: https://studenter.miun.se/~fibe2504/lab2-php
 <img width="341" height="282" alt="er" src="https://github.com/user-attachments/assets/cf7e52a3-d6e7-4ed4-90f7-cd2c9203d4c0" />
 
 ### UML
-<img width="1040" height="561" alt="uml" src="https://github.com/user-attachments/assets/309949db-0a13-46ef-a02a-8aa8f711f83a" />
+<img width="1039" height="561" alt="uml" src="https://github.com/user-attachments/assets/af43bca5-a737-4120-95a1-8971f66e0d53" />
 
 ## Databas
 Laborationen använder en MYSQL-databas via Mittuniversitetet och phpmyadmin. Databasinställningar lagras i en ej versionshanterad .env-fil.
